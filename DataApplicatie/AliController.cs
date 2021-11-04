@@ -47,6 +47,20 @@ namespace DataApplicatie
             return "value";
         }
 
+        // GET api/<PersoonController>/5
+        [HttpGet("Product1/{denaam}")] //link 
+        public Product SaveNaam(string denaam)
+        {
+            Product product1 = new Product();
+            product1.Naam = denaam;
+
+            _db.Add(product1);
+            _db.SaveChanges();
+
+            return product1; //wat return ik hier? is het niet alleen save?
+
+        }
+
 
         [HttpGet("LijstProducten")]
         public DbSet<Product> namenVerkrijgen()
