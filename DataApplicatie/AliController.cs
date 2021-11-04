@@ -1,5 +1,6 @@
 ﻿using DBLaag;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,13 @@ namespace DataApplicatie
             _db.Add(product1);
             _db.SaveChanges();
             return "value";
+        }
+
+
+        [HttpGet("LijstProducten")]
+        public DbSet<Product> namenVerkrijgen()
+        {
+            return _db.producten;
         }
 
         // POST api/<AliController>
