@@ -9,5 +9,6 @@ namespace DBLaag
     {
         public DatabaseToegang(DbContextOptions options) : base(options) { }
         public DbSet<Product> producten { get; set; }
+        public DbSet<Bestelling> bestellingen { get; set; }
     }
 }
