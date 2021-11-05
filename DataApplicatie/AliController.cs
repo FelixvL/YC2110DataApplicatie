@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,6 +47,35 @@ namespace DataApplicatie
             _db.SaveChanges();
             return "value";
         }
+
+        
+        //----------------------------------------------------------------------------------------------//
+
+        // POST api/<BestellingController>
+        [HttpPost("voegProductToe")]
+        public void Post([FromBody] Product product)
+        {
+            Debug.WriteLine(product);
+            Debug.WriteLine(product.Naam);
+
+            Debug.WriteLine("Ja aangekomen");
+            _db.Add(product);
+            _db.SaveChanges();
+            
+        }
+
+        //----------------------------------------------------------------------------------------------//
+
+        // GET: api/<BestellingController>
+        [HttpGet("alleProducten")]
+        public DbSet<Product> GetProducts()
+        {
+            return _db.producten;
+        }
+
+        //----------------------------------------------------------------------------------------------//
+
+
 
         // GET api/<PersoonController>/5
         [HttpGet("Product1/{denaam}")] //link 
