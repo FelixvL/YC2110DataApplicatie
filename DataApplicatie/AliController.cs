@@ -48,6 +48,8 @@ namespace DataApplicatie
             return "value";
         }
 
+        //-----------------------------------------------------------------------------------------------//
+
         
         //----------------------------------------------------------------------------------------------//
 
@@ -63,6 +65,16 @@ namespace DataApplicatie
             _db.SaveChanges();
             
         }
+        //----------------------------------------------------------------------------------------------//
+        // DELETE api/<BestellingController>
+        [HttpDelete("verwijderProduct/{Id}")]
+        public void DeleteProduct(int Id)
+        {
+            Product product = _db.producten.Find(Id);
+            Debug.WriteLine("verwijderd " + Id);
+            _db.Remove(product);
+            _db.SaveChanges();
+        }
 
         //----------------------------------------------------------------------------------------------//
 
@@ -74,6 +86,21 @@ namespace DataApplicatie
         }
 
         //----------------------------------------------------------------------------------------------//
+        // GET: api/<BestellingController>
+        [HttpGet("filterProducten")]
+        public List<Product> FilterProducts()
+        {
+            var producten = _db.producten
+                    .Where(p => p.Prijs >= 100).ToList(); //where laat zien waar je zoekt.
+                     //find alle eerste resultaat of een default geven
+
+            return producten;
+        }
+
+        
+
+        //----------------------------------------------------------------------------------------------//
+
 
 
 
