@@ -4,45 +4,22 @@ using DBLaag;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBLaag.Migrations
 {
     [DbContext(typeof(DatabaseToegang))]
-    partial class DatabaseToegangModelSnapshot : ModelSnapshot
+    [Migration("20211115091510_Nieuw")]
+    partial class Nieuw
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DBLaag.BesteldeProducten", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BestellingId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("aantalVanHetProduct")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BestellingId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("besteldeProducten");
-                });
 
             modelBuilder.Entity("DBLaag.Bestelling", b =>
                 {
@@ -90,24 +67,6 @@ namespace DBLaag.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("producten");
-                });
-
-            modelBuilder.Entity("DBLaag.BesteldeProducten", b =>
-                {
-                    b.HasOne("DBLaag.Bestelling", null)
-                        .WithMany("BesteldeProducten")
-                        .HasForeignKey("BestellingId");
-
-                    b.HasOne("DBLaag.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("DBLaag.Bestelling", b =>
-                {
-                    b.Navigation("BesteldeProducten");
                 });
 #pragma warning restore 612, 618
         }
