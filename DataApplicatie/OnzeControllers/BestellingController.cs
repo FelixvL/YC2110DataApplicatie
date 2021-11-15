@@ -30,9 +30,11 @@ namespace DataApplicatie.OnzeControllers
 
         // GET api/<BestellingController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Bestelling Get(int id)
         {
-            return "value";
+      //      Bestelling deBestelling = _db.bestellingen.Find();
+            Bestelling deBestelling = _db.bestellingen.Where(c => c.Id == id).FirstOrDefault();
+            return deBestelling;
         }
 
         // POST api/<BestellingController>
