@@ -42,11 +42,8 @@ namespace DataApplicatie.OnzeControllers
             return deBestelling;
         }
         [HttpGet("voegProductToeAanBesteldeProducten/{productId}")]
-        public string voegProductToeAanBestelling(int productId, int bestellingId)
+        public string voegProductToeAanBestelling(int productId)
         {
-            Debug.WriteLine("Er is een product aan toegevoegd");
-            Debug.WriteLine(productId +"><"+bestellingId);
-            Bestelling deBestelling = _db.bestellingen.Where(c => c.Id == bestellingId).FirstOrDefault();
             Product hetProduct = _db.producten.Where(p => p.Id == productId).FirstOrDefault();
             BesteldeProducten besteldeProducten = new BesteldeProducten();
             _db.Add(besteldeProducten);
