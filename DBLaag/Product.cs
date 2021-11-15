@@ -12,5 +12,6 @@ namespace DBLaag
         public string Specificaties { get; set; }
         public string Fotonaam { get; set; }
         public int Discount { get; set; }
+        public BesteldeProducten BesteldeProduct { get; set; }
     }
 }
