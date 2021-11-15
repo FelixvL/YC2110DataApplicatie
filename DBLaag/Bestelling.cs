@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,5 +11,6 @@ namespace DBLaag
         public DateTime Datum { get; set; }
         public string Status { get; set; }
         public string KlantNaam { get; set; }
+        public DbSet<BesteldeProducten> BesteldeProducten { get; set; }
     }
 }
