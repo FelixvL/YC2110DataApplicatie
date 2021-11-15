@@ -20,41 +20,39 @@ namespace DataApplicatie.OnzeControllers
         {
             _db = db;
         }
-        // GET: api/<BestellingController>
+
         [HttpGet("alleBestellingen")]
         public DbSet<Bestelling> Get()
         {
             return _db.bestellingen;
         }
-
-
-        // GET api/<BestellingController>/5
+        [HttpGet("alleBesteldeProducten")]
+        public DbSet<BesteldeProducten> alleBesteldeProducten()
+        {
+            foreach (BesteldeProducten bp in _db.besteldeProducten) {
+                Debug.WriteLine( bp.ProductId );
+                Debug.WriteLine(">>");
+            }
+            return _db.besteldeProducten;
+        }
         [HttpGet("{id}")]
         public Bestelling Get(int id)
         {
-      //      Bestelling deBestelling = _db.bestellingen.Find();
             Bestelling deBestelling = _db.bestellingen.Where(c => c.Id == id).FirstOrDefault();
             return deBestelling;
         }
-
-        // POST api/<BestellingController>
-        [HttpPost("voegBestellingToe")]
-        public void Post([FromBody] Bestelling bestelling)
+        [HttpGet("voegProductToeAanBesteldeProducten/{productId}")]
+        public string voegProductToeAanBestelling(int productId, int bestellingId)
         {
-            Debug.WriteLine(bestelling.KlantNaam);
-            Debug.WriteLine("Ja aangekomen");
-        }
-
-        // PUT api/<BestellingController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BestellingController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            Debug.WriteLine("Er is een product aan toegevoegd");
+            Debug.WriteLine(productId +"><"+bestellingId);
+            Bestelling deBestelling = _db.bestellingen.Where(c => c.Id == bestellingId).FirstOrDefault();
+            Product hetProduct = _db.producten.Where(p => p.Id == productId).FirstOrDefault();
+            BesteldeProducten besteldeProducten = new BesteldeProducten();
+            _db.Add(besteldeProducten);
+            besteldeProducten.Product = hetProduct;
+            _db.SaveChanges();
+            return "yes";
         }
     }
 }
