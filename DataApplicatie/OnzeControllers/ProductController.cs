@@ -1,7 +1,9 @@
 ﻿using DBLaag;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -46,6 +48,15 @@ namespace DataApplicatie.OnzeControllers
         {
             Product hetProduct = _db.producten.Where(c => c.Id == id).FirstOrDefault();
             return hetProduct;
+        }
+
+        // POST api/<ValuesController>
+        [EnableCors("AllowOrigin")]
+        [HttpPost("nieuwproduct")]
+        public void Post([FromBody] Product hetproduct)
+        {
+            _db.Add(hetproduct);
+            _db.SaveChanges();
         }
 
         // POST api/<ValuesController>
