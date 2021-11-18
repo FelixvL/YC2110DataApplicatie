@@ -1,6 +1,7 @@
 ﻿using DBLaag;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,14 +43,15 @@ namespace DataApplicatie.OnzeControllers
             return deBestelling;
         }
         [HttpGet("voegProductToeAanBesteldeProducten/{productId}")]
-        public string voegProductToeAanBestelling(int productId)
+        public int voegProductToeAanBestelling(int productId)
         {
             Product hetProduct = _db.producten.Where(p => p.Id == productId).FirstOrDefault();
             BesteldeProducten besteldeProducten = new BesteldeProducten();
-            _db.Add(besteldeProducten);
+            EntityEntry<BesteldeProducten> bp = _db.Add(besteldeProducten);
             besteldeProducten.Product = hetProduct;
+            
             _db.SaveChanges();
-            return "yes";
+            return bp.Entity.Id;
         }
     }
 }
