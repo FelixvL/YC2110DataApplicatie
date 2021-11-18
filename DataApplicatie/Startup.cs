@@ -30,6 +30,10 @@ namespace DataApplicatie
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +55,7 @@ namespace DataApplicatie
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
