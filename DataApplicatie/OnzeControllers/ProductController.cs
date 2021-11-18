@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,6 +21,16 @@ namespace DataApplicatie.OnzeControllers
             _db = db;
         }
 
+        //---------------------------------------------------------------------------
+        //TEST
+        [HttpGet("multiplier/{num1}/{num2}")]
+        public int Welcome(int num1, int num2)
+        {
+            int result = num1 * num2;
+
+            return result;
+        }
+        //---------------------------------------------------------------------------
 
 
         // GET: api/<ValuesController>

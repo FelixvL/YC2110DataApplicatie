@@ -102,8 +102,6 @@ namespace DataApplicatie
         //----------------------------------------------------------------------------------------------//
 
 
-
-
         // GET api/<PersoonController>/5
         [HttpGet("Product1/{denaam}")] //link 
         public Product SaveNaam(string denaam)
