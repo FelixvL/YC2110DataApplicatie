@@ -1,6 +1,7 @@
 ﻿using DBLaag;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -56,6 +57,24 @@ namespace DataApplicatie.OnzeControllers
         public void Post([FromBody] Product hetproduct)
         {
             _db.Add(hetproduct);
+            _db.SaveChanges();
+        }
+
+        // GET: api/<BestellingController>
+        [EnableCors("AllowOrigin")]
+        [HttpGet("alleProducten")]
+        public DbSet<Product> GetProducts()
+        {
+            return _db.producten;
+        }
+
+        [EnableCors("AllowOrigin")]
+        [HttpDelete("verwijderProduct/{Id}")]
+        public void DeleteProduct(int Id)
+        {
+            Product product = _db.producten.Find(Id);
+            Debug.WriteLine("verwijderd " + Id);
+            _db.Remove(product);
             _db.SaveChanges();
         }
 
