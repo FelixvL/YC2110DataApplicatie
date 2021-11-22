@@ -26,9 +26,9 @@ namespace DataApplicatie.OnzeControllers
         [HttpGet("alleBestellingen")]
         public DbSet<Bestelling> Get()
         {
-            Bestelling b = _db.bestellingen.First<Bestelling>();
-            Debug.WriteLine("=================");
-            Debug.WriteLine(b.BesteldeProducten.Count());
+       //     Bestelling b = _db.bestellingen.First<Bestelling>();
+         //   Debug.WriteLine("=================");
+          //  Debug.WriteLine(b.BesteldeProducten.Count());
             //            _db.besteldeProducten.Where<BesteldeProducten>(t => t.ProductId == );
             return _db.bestellingen;
         }
