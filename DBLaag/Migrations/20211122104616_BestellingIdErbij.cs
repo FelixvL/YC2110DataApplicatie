@@ -42,7 +42,7 @@ namespace DBLaag.Migrations
                 name: "IX_besteldeProducten_ProductId",
                 table: "besteldeProducten",
                 column: "ProductId",
-                unique: true);
+                unique: false); /// DEZE
 
             migrationBuilder.AddForeignKey(
                 name: "FK_besteldeProducten_bestellingen_BestellingId",
