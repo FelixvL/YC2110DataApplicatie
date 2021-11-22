@@ -81,6 +81,27 @@ namespace DataApplicatie.OnzeControllers
             _db.SaveChanges();
             return terug.Id;
         }
+
+        [EnableCors("AllowOrigin")]
+        [HttpGet("voegBestellingToe/{klantnaam}")]
+        public string voegKlantAanBestelling(string klantnaam)
+        {
+            Bestelling bestelling = new Bestelling();
+            bestelling.KlantNaam = klantnaam;
+            
+
+            _db.Add(bestelling);
+            Debug.WriteLine(bestelling.KlantNaam);
+
+        
+            _db.SaveChanges();
+
+            return "naam toegevoegd van voegKlantToe";
+        }
+
+
+
+
         [EnableCors("AllowOrigin")]
         [HttpGet("voegProductToeAanBestelling/{bestelid}/{productid}")]
         public int voegProductToeAanBestelling(int bestelid, int productid)
