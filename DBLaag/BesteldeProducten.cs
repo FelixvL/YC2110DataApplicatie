@@ -11,5 +11,6 @@ namespace DBLaag
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
+        public int BestellingId { get; set; }
     }
 }
