@@ -129,6 +129,14 @@ namespace DataApplicatie.OnzeControllers
             _db.SaveChanges();
             return 7;
         }
+        [HttpGet("verwijderbestelling/{bestelid}")]
+        public int verwijderbestelling(int bestelid)
+        {
+            Bestelling teverwijderen = _db.bestellingen.Where(u => u.Id == bestelid).First();
+            _db.bestellingen.Remove(teverwijderen);
+            _db.SaveChanges();
+            return 7;
+        }
     }
         
 }
