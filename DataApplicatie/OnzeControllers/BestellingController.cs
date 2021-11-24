@@ -88,13 +88,11 @@ namespace DataApplicatie.OnzeControllers
         {
             Bestelling bestelling = new Bestelling();
             bestelling.KlantNaam = klantnaam;
-            
-
+         
             _db.Add(bestelling);
             Debug.WriteLine(bestelling.KlantNaam);
-
-        
             _db.SaveChanges();
+
 
             return "naam toegevoegd van voegKlantToe";
         }
