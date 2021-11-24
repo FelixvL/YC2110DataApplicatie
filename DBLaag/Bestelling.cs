@@ -11,6 +11,6 @@ namespace DBLaag
         public DateTime Datum { get; set; }
         public string Status { get; set; }
         public string KlantNaam { get; set; }
-        public DbSet<BesteldeProducten> BesteldeProducten { get; set; }
+        public List<BesteldeProducten> BesteldeProducten { get; set; }
     }
 }

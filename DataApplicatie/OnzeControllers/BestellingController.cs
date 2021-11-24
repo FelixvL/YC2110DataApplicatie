@@ -24,13 +24,29 @@ namespace DataApplicatie.OnzeControllers
         }
 
         [HttpGet("alleBestellingen")]
-        public DbSet<Bestelling> Get()
+        public List<Bestelling> Get()
         {
-       //     Bestelling b = _db.bestellingen.First<Bestelling>();
-         //   Debug.WriteLine("=================");
-          //  Debug.WriteLine(b.BesteldeProducten.Count());
-            //            _db.besteldeProducten.Where<BesteldeProducten>(t => t.ProductId == );
-            return _db.bestellingen;
+            List<Bestelling> bestellingen = _db.bestellingen.ToList();// alle bestellingen
+            List<Bestelling> returnList = new List<Bestelling>();  // lege lijst
+            for (int x = 0; x <  bestellingen.Count(); x++) {
+                Bestelling bestelling = new Bestelling();   // verse kopie
+                bestelling.BesteldeProducten = new List<BesteldeProducten>(); // in die kopie maak ik een lege lijst aan
+                List<BesteldeProducten> productenVanBestelling = _db.besteldeProducten.Where(c => c.BestellingId == bestellingen.ElementAt(x).Id).ToList();
+                for (int y = 0; y < productenVanBestelling.Count(); y++) {
+                    Product p = new Product();
+                    Product tempP = _db.producten.Where(t => t.Id == productenVanBestelling.ElementAt(y).ProductId).First();
+                    p.Naam = tempP.Naam;
+                    p.Fotonaam = tempP.Fotonaam;
+                    productenVanBestelling.ElementAt(y).Product = p;
+           //         productenVanBestelling.ElementAt(y).Product = _db.producten.Where(t => t.Id == productenVanBestelling.ElementAt(y).ProductId).First();
+                }
+                BesteldeProducten bp = new BesteldeProducten();
+                bestelling.BesteldeProducten = productenVanBestelling.ToList();
+
+                returnList.Add(bestelling);
+            }
+    
+            return bestellingen;
         }
         [HttpGet("alleBesteldeProducten")]
         public DbSet<BesteldeProducten> alleBesteldeProducten()
